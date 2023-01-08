@@ -35,8 +35,16 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Call_option.h" />
+		<Unit filename="include/Chooser_option.h" />
+		<Unit filename="include/Exchange_option.h" />
+		<Unit filename="include/Futures_option.h" />
+		<Unit filename="include/Put_option.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Call_option.cpp" />
+		<Unit filename="src/Chooser_option.cpp" />
+		<Unit filename="src/Exchange_option.cpp" />
+		<Unit filename="src/Futures_option.cpp" />
+		<Unit filename="src/Put_option.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

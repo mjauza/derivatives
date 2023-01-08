@@ -4,13 +4,12 @@
 #include "Futures_option.h"
 #include "Chooser_option.h"
 #include "Exchange_option.h"
+#include "Barrier_option.h"
 
 using namespace std;
 
 int main()
 {
-
-
     double K = 90;
     double T = 2;
     Call_option call_opt = Call_option(K, T);
@@ -85,6 +84,21 @@ int main()
     double rho = 0.4;
     double ex_option_price = ex_option.BS(X, Y, sigma_X, sigma_Y, rho, t);
     std::cout << "Exchange option BS: " << ex_option_price << "\n";
+
+    // barrier options
+    Barrier_option bar_call_do = Barrier_option(K, T, "call", 70, "do");
+    double bar_call_do_price = bar_call_do.BS(80, r,sigma,t);
+    Barrier_option bar_call_di = Barrier_option(K, T, "call", 70, "di");
+    double bar_call_di_price = bar_call_di.BS(80, r,sigma,t);
+    Barrier_option bar_call_uo = Barrier_option(90, T, "call", 100, "uo");
+    double bar_call_uo_price = bar_call_uo.BS(80, r,sigma,t);
+    Barrier_option bar_call_ui = Barrier_option(K, T, "call", 95, "ui");
+    double bar_call_ui_price = bar_call_ui.BS(80, r,sigma,t);
+
+    std::cout << "bar_call_do_price = " << bar_call_do_price << "\n";
+    std::cout << "bar_call_di_price = " << bar_call_di_price << "\n";
+    std::cout << "bar_call_uo_price = " << bar_call_uo_price << "\n";
+    std::cout << "bar_call_ui_price = " << bar_call_ui_price << "\n";
 
 
     ///////////////////////////////////////

@@ -7,18 +7,19 @@
 1673186639 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\call_option.h
 	<cmath>
 
-1673186694 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\main.cpp
+1673206868 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\main.cpp
 	<iostream>
 	"Call_option.h"
 	"Put_option.h"
 	"Futures_option.h"
 	"Chooser_option.h"
 	"Exchange_option.h"
+	"Barrier_option.h"
 
 1673186712 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\put_option.h
 	<cmath>
 
-1673172364 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\put_option.cpp
+1673186724 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\put_option.cpp
 	"Put_option.h"
 	<cmath>
 
@@ -45,4 +46,16 @@
 	<cmath>
 
 1673182577 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\exchange_option.h
+
+1673206953 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\barrier_option.h
+	<string>
+	"Call_option.h"
+
+1673207279 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\barrier_option.cpp
+	"Barrier_option.h"
+	<string>
+	<cmath>
+	"Call_option.h"
+	<stdexcept>
+	<iostream>
 
