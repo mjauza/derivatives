@@ -1,6 +1,7 @@
 #include "Call_option.h"
 #include <cmath>
 #define _USE_MATH_DEFINES
+#include <iostream>
 Call_option::Call_option(double K, double T)
 {
     this -> K = K;
@@ -55,6 +56,25 @@ double Call_option::rho(double S, double t, double sigma, double r)
     double d2 = d1 - sigma*sqrt(T-t);
     double rh = (T-t)*K*exp(-r*(T-t))*normalCDF(d2);
     return rh;
+}
+
+double Call_option::impl_vol(double market_price, double sigma0, double S, double t, double r, double q, double eps)
+{
+    //use newton raphson
+    double fun = BS(S, t, sigma0, r,q) - market_price;
+
+    double deriv_fun = vega(S, t, sigma0, r);
+    double h =  fun / deriv_fun;
+    while (std::abs(h) >= eps)
+    {
+        fun = BS(S, t, sigma0, r,q) - market_price;
+        deriv_fun = vega(S, t, sigma0, r);
+        h = fun/deriv_fun;
+
+        // x(i+1) = x(i) - f(x) / f'(x)
+        sigma0 = sigma0 - h;
+    }
+    return sigma0;
 }
 
 Call_option::~Call_option()

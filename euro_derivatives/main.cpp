@@ -1,13 +1,16 @@
 #include <iostream>
 #include "Call_option.h"
 #include "Put_option.h"
-
+#include "Futures_option.h"
+#include "Chooser_option.h"
+#include "Exchange_option.h"
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+
+
     double K = 90;
     double T = 2;
     Call_option call_opt = Call_option(K, T);
@@ -15,6 +18,8 @@ int main()
 
     double S = 100;
     double t = 0;
+    double Tc = 1;
+    double S_Tc = 95;
     double sigma = 0.1;
     double r = 0.01;
     double call_bs_price = call_opt.BS(S,t,sigma,r);
@@ -22,6 +27,12 @@ int main()
 
     std::cout << "Call BS price: " << call_bs_price << "\n";
     std::cout << "Put BS price: " << put_bs_price << "\n";
+
+    // get implied vol
+    double call_imp_vol = call_opt.impl_vol(13, 0.4, S, t, r);
+    double put_imp_vol = put_opt.impl_vol(1.3, 0.4, S, t, r);
+    std::cout << "Call BS implied vol: " << call_imp_vol << "\n";
+    std::cout << "Put BS implied vol: " << put_imp_vol << "\n";
 
     // get deltas
     double call_delta = call_opt.delta(S, t, sigma, r);
@@ -53,5 +64,29 @@ int main()
     double put_rho = put_opt.rho(S, t, sigma, r);
     std::cout << "Call rho: " << call_rho << "\n";
     std::cout << "Put rho: " << put_rho << "\n";
+
+    // futures options
+    Futures_option call_future_opt = Futures_option(K, T, "call");
+    double f = 100;
+    double call_future_bs = call_future_opt.BS(f,sigma,t,r);
+    std::cout << "Future call BS: " << call_future_bs << "\n";
+
+    // chooser option
+    Chooser_option choos_opt = Chooser_option(K,T);
+    double choos_opt_bs = choos_opt.BS_Tc(S_Tc, Tc, sigma, r);
+    std::cout << "Chooser option BS at Tc: " << choos_opt_bs << "\n";
+
+    //exchange options
+    Exchange_option ex_option = Exchange_option(K,T);
+    double X = 100;
+    double Y = 90;
+    double sigma_X = 0.2;
+    double sigma_Y = 0.2;
+    double rho = 0.4;
+    double ex_option_price = ex_option.BS(X, Y, sigma_X, sigma_Y, rho, t);
+    std::cout << "Exchange option BS: " << ex_option_price << "\n";
+
+
+    ///////////////////////////////////////
     return 0;
 }
