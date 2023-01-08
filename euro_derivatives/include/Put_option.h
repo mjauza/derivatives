@@ -1,12 +1,11 @@
-#ifndef CALL_OPTION_H
-#define CALL_OPTION_H
+#ifndef PUT_OPTION_H
+#define PUT_OPTION_H
 
 
-class Call_option
+class Put_option
 {
     public:
-        Call_option(double K, double T);
-        virtual ~Call_option();
+        Put_option(double K, double T);
         double BS(double S, double t, double sigma, double r, double q = 0);
         double delta(double S, double t, double sigma, double r);
         double theta(double S, double t, double sigma, double r);
@@ -14,6 +13,7 @@ class Call_option
         double vega(double S, double t, double sigma, double r);
         double rho(double S, double t, double sigma, double r);
         double normalCDF(double x);
+        virtual ~Put_option();
 
     protected:
         double K;
@@ -22,4 +22,4 @@ class Call_option
     private:
 };
 
-#endif // CALL_OPTION_H
+#endif // PUT_OPTION_H
