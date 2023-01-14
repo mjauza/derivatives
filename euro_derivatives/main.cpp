@@ -5,11 +5,20 @@
 #include "Chooser_option.h"
 #include "Exchange_option.h"
 #include "Barrier_option.h"
+#include "Lookback_option.h"
+#include "Simulation_methods.h"
+#include <tuple>
+#include <vector>
 
 using namespace std;
-
+void test_BM();
+void test_geom_BM();
 int main()
 {
+    //test_BM();
+    test_geom_BM();
+
+    /*
     double K = 90;
     double T = 2;
     Call_option call_opt = Call_option(K, T);
@@ -100,7 +109,38 @@ int main()
     std::cout << "bar_call_uo_price = " << bar_call_uo_price << "\n";
     std::cout << "bar_call_ui_price = " << bar_call_ui_price << "\n";
 
+    // lookback option
+    double S_lb = 100;
+    double m_M = S_lb;
+    double X_lb = 90;
+    Lookback_option lb_call = Lookback_option(X_lb,3,"call");
+    double lb_call_price = lb_call.BS(S_lb,m_M,sigma,0,r);
+    Lookback_option lb_put = Lookback_option(X_lb,3,"put");
+    double lb_put_price = lb_put.BS(S_lb,m_M,sigma,0,r);
+
+    std::cout <<"Lookback call price: " << lb_call_price << "\n";
+    std::cout <<"Lookback put price: " << lb_put_price << "\n";
+
+    */
 
     ///////////////////////////////////////
     return 0;
+}
+
+void test_BM()
+{
+    //std::tuple<std::vector<double>, std::vector<double>> bm_path_tuple = Simulation_methods::BM(100, 1.0);
+    //std::vector<double> bm_times = std::get<0>(bm_path_tuple);
+    //std::vector<double> bm_values = std::get<1>(bm_path_tuple);
+    auto [bm_times, bm_values] = Simulation_methods::BM(100, 1.0);
+    for(int i = 0; i < bm_times.size(); i++){
+        std::cout << "BM time = " << bm_times[i] << " ; value = " << bm_values[i] << "\n";
+    }
+}
+void test_geom_BM()
+{
+    auto [bm_times, bm_values] = Simulation_methods::geom_BM(100, 1.0,0.1,0.2,100);
+    for(int i = 0; i < bm_times.size(); i++){
+        std::cout << "Geometric BM time = " << bm_times[i] << " ; value = " << bm_values[i] << "\n";
+    }
 }

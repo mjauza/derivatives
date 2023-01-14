@@ -7,7 +7,7 @@
 1673186639 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\call_option.h
 	<cmath>
 
-1673206868 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\main.cpp
+1673704959 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\main.cpp
 	<iostream>
 	"Call_option.h"
 	"Put_option.h"
@@ -15,6 +15,10 @@
 	"Chooser_option.h"
 	"Exchange_option.h"
 	"Barrier_option.h"
+	"Lookback_option.h"
+	"Simulation_methods.h"
+	<tuple>
+	<vector>
 
 1673186712 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\put_option.h
 	<cmath>
@@ -51,11 +55,34 @@
 	<string>
 	"Call_option.h"
 
-1673207279 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\barrier_option.cpp
+1673209045 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\barrier_option.cpp
 	"Barrier_option.h"
 	<string>
 	<cmath>
 	"Call_option.h"
 	<stdexcept>
 	<iostream>
+
+1673693086 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\lookback_option.h
+	<string>
+
+1673693197 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\lookback_option.cpp
+	"Lookback_option.h"
+	<string>
+	<iostream>
+	<stdexcept>
+	<cmath>
+
+1673702722 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\simulation_methods.cpp
+	"Simulation_methods.h"
+	<random>
+	<cmath>
+	<string>
+	<map>
+	<tuple>
+	<vector>
+
+1673704914 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\simulation_methods.h
+	<tuple>
+	<vector>
 

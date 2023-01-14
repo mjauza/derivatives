@@ -74,17 +74,16 @@ double Barrier_option::BS_call_di(double S, double r, double sigma, double t)
 double Barrier_option::BS_call_uo(double S, double r, double sigma, double t)
 {
     double delta_num = 2*r/pow(sigma,2);
+
     Call_option euro_call_a = Call_option(K,T-t);
-    double euro_call_a_price = euro_call_a.BS(S, 0, sigma, r);
+    double price_a_1 = euro_call_a.BS(S, 0, sigma, r);
+    double price_a_2 = euro_call_a.BS(pow(B,2)/S, 0, sigma, r);
+
     Call_option euro_call_b = Call_option(B,T-t);
-    double euro_call_b_price = euro_call_b.BS(S, 0, sigma, r);
+    double price_b_1 = euro_call_b.BS(S, 0, sigma, r);
+    double price_b_2 = euro_call_b.BS(pow(B,2)/S, 0, sigma, r);
 
-    Call_option euro_call_1 = Call_option(K,T-t);
-    double euro_call_1_price = euro_call_1.BS(pow(B,2)/S, 0, sigma, r);
-    Call_option euro_call_2 = Call_option(B,T-t);
-    double euro_call_2_price = euro_call_2.BS(pow(B,2)/S, 0, sigma, r);
-    return (euro_call_a_price - pow(B/S, delta_num-1)*euro_call_1_price) - (euro_call_b_price - pow(B/S,delta_num-1)*euro_call_2_price);
-
+    return (price_a_1 - pow(B/S, delta_num - 1)*price_a_2) - (price_b_1 - pow(B/S, delta_num - 1)*price_b_2);
 }
 
 double Barrier_option::BS_call_ui(double S, double r, double sigma, double t)
