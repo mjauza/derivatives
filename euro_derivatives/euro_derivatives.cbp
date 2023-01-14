@@ -39,14 +39,18 @@
 		<Unit filename="include/Chooser_option.h" />
 		<Unit filename="include/Exchange_option.h" />
 		<Unit filename="include/Futures_option.h" />
+		<Unit filename="include/Lookback_option.h" />
 		<Unit filename="include/Put_option.h" />
+		<Unit filename="include/Simulation_methods.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Barrier_option.cpp" />
 		<Unit filename="src/Call_option.cpp" />
 		<Unit filename="src/Chooser_option.cpp" />
 		<Unit filename="src/Exchange_option.cpp" />
 		<Unit filename="src/Futures_option.cpp" />
+		<Unit filename="src/Lookback_option.cpp" />
 		<Unit filename="src/Put_option.cpp" />
+		<Unit filename="src/Simulation_methods.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -13,10 +13,16 @@
 using namespace std;
 void test_BM();
 void test_geom_BM();
+void test_EU_call();
+void test_EU_put();
+
 int main()
 {
     //test_BM();
-    test_geom_BM();
+    //test_geom_BM();
+
+    test_EU_call();
+    test_EU_put();
 
     /*
     double K = 90;
@@ -143,4 +149,36 @@ void test_geom_BM()
     for(int i = 0; i < bm_times.size(); i++){
         std::cout << "Geometric BM time = " << bm_times[i] << " ; value = " << bm_values[i] << "\n";
     }
+}
+
+void test_EU_call()
+{
+    double S = 100;
+    double K = 70;
+    double T = 2;
+    double r = 0.02;
+    double sigma = 0.02;
+    double t = 0;
+    double N = 100000;
+    Call_option opt = Call_option(K, T);
+    double bs_price = opt.BS(S,t,sigma,r);
+    double mc_price = opt.MC_BS(S,t,sigma,r,N);
+    std::cout << "BS price = " << bs_price << "\n";
+    std::cout << "MC price = " << mc_price << "\n";
+}
+
+void test_EU_put()
+{
+    double S = 65;
+    double K = 70;
+    double T = 2;
+    double r = 0.02;
+    double sigma = 0.02;
+    double t = 0;
+    int N = 100000;
+    Put_option opt = Put_option(K, T);
+    double bs_price = opt.BS(S,t,sigma,r);
+    double mc_price = opt.MC_BS(S,t,sigma,r,N);
+    std::cout << "BS price = " << bs_price << "\n";
+    std::cout << "MC price = " << mc_price << "\n";
 }

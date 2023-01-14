@@ -2,6 +2,8 @@
 #include <cmath>
 #define _USE_MATH_DEFINES
 #include <iostream>
+#include "Simulation_methods.h"
+#include <numeric>
 Call_option::Call_option(double K, double T)
 {
     this -> K = K;
@@ -19,6 +21,37 @@ double Call_option::BS(double S, double t, double sigma, double r, double q)
     double d2 = d1 - sigma*sqrt(T-t);
     double C = normalCDF(d1)*S*exp(-q*(T-t)) - normalCDF(d2)*K*exp(-r*(T - t));
     return C;
+}
+
+double Call_option::MC_BS(double S, double t, double sigma, double r, int N){
+
+    // simulate ST
+    std::vector<double> ST = Simulation_methods::geom_BM_t(N, T-t, r, sigma, S);
+
+    // calculate CT
+    std::vector<double> CT;
+    for(int i = 0; i<N; i++){
+        double c = std::max(ST[i] - K, 0.0);
+        CT.push_back(c);
+    }
+
+    /*
+    for(double s : ST){
+        double c = std::max(s - K, 0.0);
+        std::cout << c << "\n";
+    }
+    */
+
+
+
+    // avergae
+    double C_sum = std::accumulate(CT.begin(), CT.end(), 0);
+    double C_avg = C_sum / N;
+
+    // discount
+    double Ct = exp(-r*(T-t))*C_avg;
+    return Ct;
+
 }
 
 double Call_option::delta(double S, double t, double sigma, double r)

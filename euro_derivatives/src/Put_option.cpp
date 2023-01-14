@@ -1,6 +1,8 @@
 #include "Put_option.h"
 #include <cmath>
 #define _USE_MATH_DEFINES
+#include "Simulation_methods.h"
+#include <numeric>
 Put_option::Put_option(double K, double T)
 {
     this -> K = K;
@@ -17,6 +19,29 @@ double Put_option::BS(double S, double t, double sigma, double r, double q)
     double d2 = d1 - sigma*sqrt(T-t);
     double P = normalCDF(-d2)*K*exp(-r*(T - t)) - normalCDF(-d1)*S*exp(-q*(T-t));
     return P;
+}
+
+double Put_option::MC_BS(double S, double t, double sigma, double r, int N){
+
+    // simulate ST
+    std::vector<double> ST = Simulation_methods::geom_BM_t(N, T-t, r, sigma, S);
+
+    // calculate CT
+    std::vector<double> CT;
+    for(double s : ST){
+        double c = std::max(K - s, 0.0);
+        CT.push_back(c);
+    }
+
+
+    // avergae
+    double C_sum = std::accumulate(CT.begin(), CT.end(), 0);
+    double C_avg = C_sum / CT.size();
+
+    // discount
+    double Ct = exp(-r*(T-t))*C_avg;
+    return Ct;
+
 }
 
 double Put_option::delta(double S, double t, double sigma, double r)

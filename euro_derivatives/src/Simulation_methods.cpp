@@ -27,6 +27,19 @@ std::tuple<std::vector<double>, std::vector<double>> Simulation_methods::BM(int 
     return {path_times, path_values};
 }
 
+std::vector<double> Simulation_methods::BM_t(int N, double t)
+{
+    std::default_random_engine generator;
+    std::normal_distribution<double> distribution(0,sqrt(t));
+    std::vector<double> Wt;
+    for (int i = 0; i < N; i++){
+        double w = distribution(generator);
+        Wt.push_back(w);
+    }
+    return Wt;
+
+}
+
 std::tuple<std::vector<double>, std::vector<double>> Simulation_methods::geom_BM(int N, double T, double mu, double sigma, double S0)
 {
     auto [bm_times, bm_values] = BM(N,T);
@@ -41,6 +54,19 @@ std::tuple<std::vector<double>, std::vector<double>> Simulation_methods::geom_BM
     return {bm_times, path_values};
 
 }
+
+std::vector<double> Simulation_methods::geom_BM_t(int N, double t, double mu, double sigma, double S0)
+{
+    std::vector<double> Wt = BM_t(N, t);
+    std::vector<double> St;
+    double drift = mu - pow(sigma,2)/2;
+    for(int i=0; i<N; i++){
+        double s = S0*exp(drift*t + sigma*Wt[i]);
+        St.push_back(s);
+    }
+    return St;
+}
+
 
 Simulation_methods::~Simulation_methods()
 {

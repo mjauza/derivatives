@@ -6,6 +6,8 @@ class Put_option
     public:
         Put_option(double K, double T);
         double BS(double S, double t, double sigma, double r, double q = 0);
+        double MC_BS(double S, double t, double sigma, double r, int N);
+
         double delta(double S, double t, double sigma, double r);
         double theta(double S, double t, double sigma, double r);
         double gamma(double S, double t, double sigma, double r);
