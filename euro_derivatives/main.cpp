@@ -10,6 +10,7 @@
 #include <tuple>
 #include <vector>
 #include "Tree_methods.h"
+#include "American_option.h"
 
 using namespace std;
 void test_BM();
@@ -17,14 +18,19 @@ void test_geom_BM();
 void test_EU_call();
 void test_EU_put();
 void test_lattice();
+void test_Am_call();
+void test_Am_put();
 
 int main()
 {
     //test_BM();
     //test_geom_BM();
 
-    test_EU_call();
+    //test_EU_call();
     //test_EU_put();
+
+    //test_Am_call();
+    test_Am_put();
 
     //test_lattice();
 
@@ -135,6 +141,32 @@ int main()
 
     ///////////////////////////////////////
     return 0;
+}
+
+void test_Am_call()
+{
+    double T = 2;
+    double K = 70;
+    int N = 10;
+    double r = 0.02;
+    double sigma = 0.02;
+    double S0 = 100;
+    American_option opt = American_option(T,K,"call");
+    double tree_price = opt.tree_BS(N,r,sigma,S0);
+    std::cout << "American call price = " << tree_price << "\n";
+}
+
+void test_Am_put()
+{
+    double T = 2;
+    double K = 70;
+    int N = 10;
+    double r = 0.02;
+    double sigma = 0.02;
+    double S0 = 50;
+    American_option opt = American_option(T,K,"put");
+    double tree_price = opt.tree_BS(N,r,sigma,S0);
+    std::cout << "American put price = " << tree_price << "\n";
 }
 
 void test_BM()

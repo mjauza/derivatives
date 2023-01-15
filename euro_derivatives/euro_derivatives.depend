@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1673782409 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\call_option.cpp
+1673783331 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\call_option.cpp
 	"Call_option.h"
 	<cmath>
 	<iostream>
@@ -10,7 +10,7 @@
 1673777619 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\call_option.h
 	<cmath>
 
-1673783014 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\main.cpp
+1673786881 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\main.cpp
 	<iostream>
 	"Call_option.h"
 	"Put_option.h"
@@ -23,6 +23,7 @@
 	<tuple>
 	<vector>
 	"Tree_methods.h"
+	"American_option.h"
 
 1673781769 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\put_option.h
 	<cmath>
@@ -101,4 +102,16 @@
 	"Tree_methods.h"
 	<vector>
 	<cmath>
+
+1673786704 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\american_option.h
+	<string>
+
+1673786904 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\american_option.cpp
+	"American_option.h"
+	<string>
+	<iostream>
+	<stdexcept>
+	<cmath>
+	<vector>
+	"Tree_methods.h"
 
