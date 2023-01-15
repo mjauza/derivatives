@@ -9,12 +9,14 @@
 #include "Simulation_methods.h"
 #include <tuple>
 #include <vector>
+#include "Tree_methods.h"
 
 using namespace std;
 void test_BM();
 void test_geom_BM();
 void test_EU_call();
 void test_EU_put();
+void test_lattice();
 
 int main()
 {
@@ -22,7 +24,9 @@ int main()
     //test_geom_BM();
 
     test_EU_call();
-    test_EU_put();
+    //test_EU_put();
+
+    //test_lattice();
 
     /*
     double K = 90;
@@ -158,13 +162,16 @@ void test_EU_call()
     double T = 2;
     double r = 0.02;
     double sigma = 0.02;
-    double t = 0;
-    double N = 100000;
+    const double t = 0;
+    double N = 10000;
     Call_option opt = Call_option(K, T);
     double bs_price = opt.BS(S,t,sigma,r);
     double mc_price = opt.MC_BS(S,t,sigma,r,N);
+    double tree_price = opt.tree_BS(sigma, S, r, 10);
     std::cout << "BS price = " << bs_price << "\n";
     std::cout << "MC price = " << mc_price << "\n";
+    std::cout << "Tree price = " << tree_price << "\n";
+
 }
 
 void test_EU_put()
@@ -179,6 +186,19 @@ void test_EU_put()
     Put_option opt = Put_option(K, T);
     double bs_price = opt.BS(S,t,sigma,r);
     double mc_price = opt.MC_BS(S,t,sigma,r,N);
+    double tree_price = opt.tree_BS(sigma, S, r, 100);
     std::cout << "BS price = " << bs_price << "\n";
     std::cout << "MC price = " << mc_price << "\n";
+    std::cout << "Tree price = " << tree_price << "\n";
+}
+
+void test_lattice()
+{
+    std::vector<std::vector<double>> lat = Tree_methods::get_lattice( 0.1, 0.2, 100, 10);
+    for(int t = 0; t<lat.size(); t++){
+        std::vector<double> price_v = lat[t];
+        for(int i = 0; i<price_v.size(); i++){
+            std::cout << "t = " << t << " i = " << i  << " price = " << price_v[i] << "\n";
+        }
+    }
 }

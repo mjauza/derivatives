@@ -9,6 +9,7 @@ class Call_option
         virtual ~Call_option();
         double BS(double S, double t, double sigma, double r, double q = 0);
         double MC_BS(double S, double t, double sigma, double r, int N);
+        double tree_BS(double sigma, double S0, double r, int N);
 
 
         double delta(double S, double t, double sigma, double r);

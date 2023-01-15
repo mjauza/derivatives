@@ -42,6 +42,7 @@
 		<Unit filename="include/Lookback_option.h" />
 		<Unit filename="include/Put_option.h" />
 		<Unit filename="include/Simulation_methods.h" />
+		<Unit filename="include/Tree_methods.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Barrier_option.cpp" />
 		<Unit filename="src/Call_option.cpp" />
@@ -51,6 +52,7 @@
 		<Unit filename="src/Lookback_option.cpp" />
 		<Unit filename="src/Put_option.cpp" />
 		<Unit filename="src/Simulation_methods.cpp" />
+		<Unit filename="src/Tree_methods.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

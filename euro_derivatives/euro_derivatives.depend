@@ -1,15 +1,16 @@
 # depslib dependency file v1.0
-1673709988 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\call_option.cpp
+1673782409 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\call_option.cpp
 	"Call_option.h"
 	<cmath>
 	<iostream>
 	"Simulation_methods.h"
 	<numeric>
+	"Tree_methods.h"
 
-1673707300 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\call_option.h
+1673777619 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\call_option.h
 	<cmath>
 
-1673710081 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\main.cpp
+1673783014 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\main.cpp
 	<iostream>
 	"Call_option.h"
 	"Put_option.h"
@@ -21,15 +22,18 @@
 	"Simulation_methods.h"
 	<tuple>
 	<vector>
+	"Tree_methods.h"
 
-1673708880 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\put_option.h
+1673781769 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\put_option.h
 	<cmath>
 
-1673709560 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\put_option.cpp
+1673783259 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\put_option.cpp
 	"Put_option.h"
 	<cmath>
 	"Simulation_methods.h"
 	<numeric>
+	"Tree_methods.h"
+	<iostream>
 
 1673177260 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\futures_option.cpp
 	<iostream>
@@ -89,4 +93,12 @@
 1673705312 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\simulation_methods.h
 	<tuple>
 	<vector>
+
+1673780976 c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\include\tree_methods.h
+	<vector>
+
+1673775675 source:c:\users\david\documents\cpp_projects\derivatives\euro_derivatives\src\tree_methods.cpp
+	"Tree_methods.h"
+	<vector>
+	<cmath>
 

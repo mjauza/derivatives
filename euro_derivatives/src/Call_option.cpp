@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Simulation_methods.h"
 #include <numeric>
+#include "Tree_methods.h"
 Call_option::Call_option(double K, double T)
 {
     this -> K = K;
@@ -35,15 +36,6 @@ double Call_option::MC_BS(double S, double t, double sigma, double r, int N){
         CT.push_back(c);
     }
 
-    /*
-    for(double s : ST){
-        double c = std::max(s - K, 0.0);
-        std::cout << c << "\n";
-    }
-    */
-
-
-
     // avergae
     double C_sum = std::accumulate(CT.begin(), CT.end(), 0);
     double C_avg = C_sum / N;
@@ -51,6 +43,43 @@ double Call_option::MC_BS(double S, double t, double sigma, double r, int N){
     // discount
     double Ct = exp(-r*(T-t))*C_avg;
     return Ct;
+
+}
+
+double Call_option::tree_BS(double sigma, double S0, double r, int N)
+{
+    double delta_t = Tree_methods::get_delta_t(this -> T, N);
+    double R = exp(r*delta_t);
+    double u = Tree_methods::get_u(delta_t,sigma);
+    double d = Tree_methods::get_d(delta_t, sigma);
+    double p = Tree_methods::get_p(R,u,d);
+
+    std::vector<std::vector<double>> lat = Tree_methods::get_lattice(delta_t, sigma, S0, N);
+
+    // get last layer and calculate price
+    std::vector<double> CT;
+    for(double s : lat[lat.size()-1]){
+        double c = std::max(s - this->K, 0.0);
+        CT.push_back(c);
+    }
+
+    double C_price[N+1][N+1];
+    for(int i=0; i<N+1; i++){
+        C_price[i][N] = CT[i];
+    }
+
+    // create a latice of call prices
+    for(int i = N-1; i>=0; i--){
+        for(int j=0; j<=i; j++){
+            double c = p*C_price[j][i+1] + (1 - p)*C_price[j+1][i+1];
+            C_price[j][i] = exp(-r*delta_t)*c;
+        }
+    }
+
+    double final_price = C_price[0][0];
+    //std::cout << final_price;
+
+    return final_price;
 
 }
 

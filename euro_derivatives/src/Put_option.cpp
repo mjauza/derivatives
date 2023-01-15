@@ -3,6 +3,8 @@
 #define _USE_MATH_DEFINES
 #include "Simulation_methods.h"
 #include <numeric>
+#include "Tree_methods.h"
+#include <iostream>
 Put_option::Put_option(double K, double T)
 {
     this -> K = K;
@@ -41,6 +43,36 @@ double Put_option::MC_BS(double S, double t, double sigma, double r, int N){
     // discount
     double Ct = exp(-r*(T-t))*C_avg;
     return Ct;
+
+}
+
+double Put_option::tree_BS(double sigma, double S0, double r, int N)
+{
+
+    double delta_t = Tree_methods::get_delta_t(this -> T, N);
+    double R = exp(r*delta_t);
+    double u = Tree_methods::get_u(delta_t,sigma);
+    double d = Tree_methods::get_d(delta_t, sigma);
+    double p = Tree_methods::get_p(R,u,d);
+
+    std::vector<std::vector<double>> lat = Tree_methods::get_lattice(delta_t, sigma, S0, N);
+
+    double C_price[N+1][N+1];
+    std::vector<double> ST_v = lat[lat.size()-1];
+    for(int i=0; i<N+1; i++){
+        double ST = ST_v[i];
+        C_price[i][N] = std::max(K-ST, 0.0);
+    }
+
+
+    for(int i = N-1; i>=0; i--){
+        for(int j=0; j<=i; j++){
+            double c = p*C_price[j][i+1] + (1 - p)*C_price[j+1][i+1];
+            C_price[j][i] = exp(-r*delta_t)*c;
+        }
+    }
+
+    return C_price[0][0];
 
 }
 
